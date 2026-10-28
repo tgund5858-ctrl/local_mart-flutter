@@ -1,0 +1,19 @@
+image: ghcr.io/cirruslabs/flutter:stable
+
+stages:
+  - build
+
+build_apk:
+  stage: build
+  before_script:
+    - flutter --version
+    - flutter pub get
+  script:
+    - flutter build apk --release
+  artifacts:
+    name: "LocalMart-Release-APK"
+    paths:
+      - build/app/outputs/flutter-apk/app-release.apk
+    expire_in: 30 days
+  only:
+    - main
