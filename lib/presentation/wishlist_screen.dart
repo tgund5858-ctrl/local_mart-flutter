@@ -57,7 +57,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
         ),
       ),
 
-      body: _buildWishlist(),
+      body: SafeArea(child: _buildWishlist()),
 
       bottomNavigationBar: CustomBottomnavigationbar(
         currentIndex: 3,

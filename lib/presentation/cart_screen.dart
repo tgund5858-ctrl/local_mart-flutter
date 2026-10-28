@@ -60,7 +60,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: _buildCart(),
+      body: SafeArea(child: _buildCart()),
     );
   }
 

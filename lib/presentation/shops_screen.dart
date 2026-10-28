@@ -62,7 +62,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
           ),
         ),
       ),
-      body: _buildProducts(),
+      body: SafeArea(child: _buildProducts()),
       bottomNavigationBar: CustomBottomnavigationbar(
         currentIndex: 2,
         onTap: (index) {
