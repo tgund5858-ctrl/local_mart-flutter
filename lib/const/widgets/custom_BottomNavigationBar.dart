@@ -35,49 +35,52 @@ class CustomBottomnavigationbar extends StatefulWidget {
 class _CustomBottomnavigationbarState extends State<CustomBottomnavigationbar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.height ?? 65,
-      decoration: BoxDecoration(
-        color: widget.backgroundColor ?? Appcolors.appBackground,
-        borderRadius:
-            widget.borderRadius ??
-            const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-      ),
-      child: BottomNavigationBar(
-        currentIndex: widget.currentIndex,
-        onTap: (index) {
-          if (widget.onTap != null) widget.onTap!(index);
-        },
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: widget.selectedColor ?? Appcolors.darkBlue,
-        unselectedItemColor: widget.unselectedColor ?? Appcolors.secondaryText,
-        items:
-            widget.items ??
-            const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: "Home",
+    return SafeArea(
+      child: Container(
+        height: widget.height ?? 65,
+        decoration: BoxDecoration(
+          color: widget.backgroundColor ?? Appcolors.appBackground,
+          borderRadius:
+              widget.borderRadius ??
+              const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.grid_view_outlined),
-                label: "Categories",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.storefront_outlined),
-                label: "Shops",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline),
-                label: "Wishlist",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "Profile",
-              ),
-            ],
+        ),
+        child: BottomNavigationBar(
+          currentIndex: widget.currentIndex,
+          onTap: (index) {
+            if (widget.onTap != null) widget.onTap!(index);
+          },
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: widget.selectedColor ?? Appcolors.darkBlue,
+          unselectedItemColor:
+              widget.unselectedColor ?? Appcolors.secondaryText,
+          items:
+              widget.items ??
+              const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.grid_view_outlined),
+                  label: "Categories",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.storefront_outlined),
+                  label: "Shops",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_outline),
+                  label: "Wishlist",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: "Profile",
+                ),
+              ],
+        ),
       ),
     );
   }
