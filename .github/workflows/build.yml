@@ -39,3 +39,4 @@ jobs:
         with:
           name: LocalMart-Release-APK
           path: build/app/outputs/flutter-apk/app-release.apk
+
