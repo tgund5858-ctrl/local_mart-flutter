@@ -6,7 +6,6 @@ import 'package:local_mart/const/widgets/custom_button.dart';
 import 'package:local_mart/presentation/homeScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Locationscreen extends StatefulWidget {
   const Locationscreen({super.key});
 
@@ -15,9 +14,9 @@ class Locationscreen extends StatefulWidget {
 }
 
 class _LocationscreenState extends State<Locationscreen> {
-  String? selectedCity;
-  String? selectedArea;
-  String? selectedDeliveryAddress;
+  String? selectedCity = "Pune";
+  String? selectedArea = "Hadpsar";
+  String? selectedDeliveryAddress = "Baner";
 
   @override
   Widget build(BuildContext context) {
@@ -59,28 +58,38 @@ class _LocationscreenState extends State<Locationscreen> {
                         SnackBar(
                           content: Text("Please Select All Options!"),
                           backgroundColor: Appcolors.errorRed,
-                          duration: Duration(seconds: 1),
+                          duration: Duration(seconds: 2),
                         ),
                       );
                       return;
                     }
 
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.setString('user_city', selectedCity!);
-                    await prefs.setString('user_area', selectedArea!);
-                    await prefs.setString(
-                      'user_location',
-                      selectedDeliveryAddress!,
-                    );
+                    try {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setString('user_city', selectedCity!);
+                      await prefs.setString('user_area', selectedArea!);
+                      await prefs.setString(
+                        'user_location',
+                        selectedDeliveryAddress!,
+                      );
 
-                    if (!context.mounted) return;
-                    
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Homescreen(),
-                      ),
-                    );
+                      if (!context.mounted) return;
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Homescreen(),
+                        ),
+                      );
+                    } catch (e) {
+                      if (!context.mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Error: $e"),
+                          backgroundColor: Appcolors.errorRed,
+                        ),
+                      );
+                    }
                   },
                 ),
               ],
@@ -124,7 +133,7 @@ class _LocationscreenState extends State<Locationscreen> {
 
         Customdropdown(
           items: ["Pune", "Waghole", "Daund", "Katraj"],
-          hint: "Pune",
+          hint: "Select City",
           value: selectedCity,
           onChanged: (value) {
             setState(() {
@@ -148,7 +157,7 @@ class _LocationscreenState extends State<Locationscreen> {
 
         Customdropdown(
           items: ["Hadpsar", "Uruli", "Pcmc", "Loni"],
-          hint: "Hadpsar",
+          hint: "Select Area",
           value: selectedArea,
           onChanged: (value) {
             setState(() {
@@ -172,7 +181,7 @@ class _LocationscreenState extends State<Locationscreen> {
 
         Customdropdown(
           items: ["Nangaon", "Kedgaon", "Baner", "Kothrud"],
-          hint: "Baner",
+          hint: "Select Delivery Location",
           value: selectedDeliveryAddress,
           onChanged: (value) {
             setState(() {
